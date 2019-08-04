@@ -21,7 +21,6 @@ class ListPemilik extends React.Component {
             'Kos Putri Srikandi 6'],
             selectedValue: '',
             selectedAnakKos: '',
-            anakPerKos: '',
             bulan: [ 
                 {
                     nama_bulan :"Januari"
@@ -59,12 +58,12 @@ class ListPemilik extends React.Component {
                 {
                     nama_bulan :"Desember"
                 }],
+                anakPerKos: ''
         }
     }
 
     componentDidMount (){
         this.props.dispatch(actions.list.getDataKos())
-        this.props.dispatch(actions.list.getAnakKos(this.props.data.response.id_kos))
     }
 
     componentWillReceiveProps (props){
@@ -76,7 +75,7 @@ class ListPemilik extends React.Component {
         }
         if(props.data_anak_per_kos){
             this.setState({
-                anakPerKos: props.data_anak_kos
+                anakPerKos: props.data_anak_per_kos
             })
         }
 
@@ -96,7 +95,7 @@ class ListPemilik extends React.Component {
     // }
 
     render() {
-        console.log('meldy', this.state.data)
+        console.log('meldy', this.state.anakPerKos)
         return(
             <View style={{width: '100%', height:'100%'}}>
                 <ScrollView style={{flex:1}}>
@@ -128,6 +127,7 @@ class ListPemilik extends React.Component {
                                     this.pengeluaran(this.state.data[itemIndex]) 
                                 } 
                         }>
+                            <Picker.item label= "Pilih kos" value=''/>
                             { 
                                 this.state.data.map((x)=>{ 
                                     return ( 
@@ -163,13 +163,14 @@ class ListPemilik extends React.Component {
                     {
                         !this.state.show2 ? null:     
                         <Picker style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                                                                        
-                            selectedValue={this.state.anakPerKos}
+                            selectedValue={this.state.dataAnak}
                             onValueChange={(itemValue, itemIndex) => 
                                 { 
-                                    this.setState({ anakPerKos: itemValue }) 
+                                    this.setState({ dataAnak: itemValue }) 
                                     this.pickKost(this.state.data[itemIndex]) 
                                 } 
                         }>
+                            <Picker.item label= "Pilih kos" value=''/>
                             { 
                                 this.state.data.map((x)=>{ 
                                     return ( 
@@ -179,17 +180,14 @@ class ListPemilik extends React.Component {
                             } 
                         </Picker> 
                     }
-                    <View style={{marginTop: 20, width: '90%', alignSelf: 'center', flex: 1}}>
-                        <ScrollView>
+                    <View style={{marginTop: 20, width: '90%', maxHeight: '70%', alignSelf: 'center', flex: 1}}>
                             <FlatList 
-                                horizontal
-                                style={{ width:'90%', height:'100%', alignSelf:'center'}}
+                                style={{ width:'90%', alignSelf:'center', paddingBottom: '5%'}}
                                 data={this.state.anakPerKos}
                                 keyExtractor={this._keyExtractors}
                                 renderItem={this._renderItems}
-                            />
-                        </ScrollView>                    
-                    </View>               
+                            />                
+                    </View>       
                 </ScrollView>
             </View>            
         );
@@ -232,13 +230,13 @@ class ListPemilik extends React.Component {
 
     _renderItems = ({item}) => (
         <ScrollView>
-        <TouchableOpacity onPress={()=> Actions.detailAnak({ datas: item })} style={{ flexDirection: "row", marginBottom:15, justifyContent:'space-between'}}>
-            <Image style={{ resizeMode: 'contain', width: "40%", height: 200}} source={require('../assets/girl.png')}/>
-            <View style={{flexDirection: "column", width:'60%', alignSelf: "center", marginTop: 10, marginBottom:10}}>
-                <Text style={{fontSize: 25, color: 'black', alignSelf: 'center'}}>{item.nama}</Text>
-                <Text style={{fontSize: 15, color: 'black', alignSelf: 'center'}}>{item.email}</Text>
-            </View>
-        </TouchableOpacity>
+            <TouchableOpacity onPress={()=> Actions.detailAnak({ datas: item })} style={{ flexDirection: "row", marginBottom: 15, justifyContent:'space-between'}}>
+                <Image style={{ resizeMode: 'contain', width: "40%", height: 200}} source={require('../assets/girl.png')}/>
+                <View style={{flexDirection: "column", width:'60%', alignSelf: "center", marginTop: 10, marginBottom:10}}>
+                    <Text style={{fontSize: 25, color: 'black', alignSelf: 'center'}}>{item.nama}</Text>
+                    <Text style={{fontSize: 15, color: 'black', alignSelf: 'center'}}>{item.email}</Text>
+                </View>
+            </TouchableOpacity>
         </ScrollView>
       );
 };
