@@ -32,6 +32,12 @@ const reducers = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 dataPengeluaran: []
+            }
+        case 'RESET_DATA_ANAK' :
+            return {
+                ...state,
+                data_anak_per_kos: [],
+                data_anak_kos: []
             } 
         case 'RESET_LOGIN' :
             return {

@@ -20,6 +20,8 @@ class ListPemilik extends React.Component {
             'Kos Putri Srikandi 5',
             'Kos Putri Srikandi 6'],
             selectedValue: '',
+            selectedAnakKos: '',
+            anakPerKos: '',
             bulan: [ 
                 {
                     nama_bulan :"Januari"
@@ -62,6 +64,7 @@ class ListPemilik extends React.Component {
 
     componentDidMount (){
         this.props.dispatch(actions.list.getDataKos())
+        this.props.dispatch(actions.list.getAnakKos(this.props.data.response.id_kos))
     }
 
     componentWillReceiveProps (props){
@@ -69,6 +72,17 @@ class ListPemilik extends React.Component {
         if(props.data_kos){
             this.setState({
                 data: props.data_kos
+            })
+        }
+        if(props.data_anak_per_kos){
+            this.setState({
+                anakPerKos: props.data_anak_kos
+            })
+        }
+
+        if(props.data_anak_kos){
+            this.setState({
+                anakKos : props.data_anak_kos
             })
         }
     }
@@ -127,13 +141,13 @@ class ListPemilik extends React.Component {
                         !this.state.selectedValue ? null :
                         <FlatList 
                             horizontal
-                            style={{ width:'90%', height:200, alignSelf:'center'}}
+                            style={{ width:'90%', height:100, alignSelf:'center'}}
                             data={this.state.bulan}
                             keyExtractor={this._keyExtractor}
                             renderItem={this._renderItem}
                         />
                     }
-                    {/* <TouchableOpacity onPress={()=>this.setState({ show2: !this.state.show2})} style={{flexDirection:'row', alignItems: 'center', width:'100%', height:40, justifyContent:'center', backgroundColor:'rgb(2,98,148)'}}>
+                    <TouchableOpacity onPress={()=>this.setState({ show2: !this.state.show2})} style={{flexDirection:'row', alignItems: 'center', width:'100%', height:40, justifyContent:'center', backgroundColor:'rgb(2,98,148)'}}>
                         <View style={{width: '50%', justifyContent: 'center'}}>
                             <Text style={{ alignSelf:'flex-end', color:'white', fontSize:18}}>Daftar Anak</Text>
                         </View>
@@ -145,25 +159,37 @@ class ListPemilik extends React.Component {
                                 <Icon name='chevron-small-up' type='Entypo' style={{width:60, height:30, position:'absolute', right:5, color: 'white' }} />        
                             }                            
                         </View>
-                    </TouchableOpacity>      */}
+                    </TouchableOpacity>     
                     {
                         !this.state.show2 ? null:     
-                        <ModalDropdown style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                        
-                        animated
-                        dropdownStyle={{marginTop:-8, width:'40%', alignSelf:'center'}}
-                           options={this.state.data}
-                           onSelect={(idx, value) => this._pickerd(value)}/>  
-                    }         
-                    {/* {
-                        !this.state.picked ? null :
-                        <FlatList 
-                            horizontal
-                            style={{ width:'90%', height:200, alignSelf:'center'}}
-                            data={this.state.bulan}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this._renderItem}
-                        />
-                    }                */}
+                        <Picker style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                                                                        
+                            selectedValue={this.state.anakPerKos}
+                            onValueChange={(itemValue, itemIndex) => 
+                                { 
+                                    this.setState({ anakPerKos: itemValue }) 
+                                    this.pickKost(this.state.data[itemIndex]) 
+                                } 
+                        }>
+                            { 
+                                this.state.data.map((x)=>{ 
+                                    return ( 
+                                        <Picker.item label={x.nama_kos} value={x.id_kos}/>
+                                    ) 
+                                }) 
+                            } 
+                        </Picker> 
+                    }
+                    <View style={{marginTop: 20, width: '90%', alignSelf: 'center', flex: 1}}>
+                        <ScrollView>
+                            <FlatList 
+                                horizontal
+                                style={{ width:'90%', height:'100%', alignSelf:'center'}}
+                                data={this.state.anakPerKos}
+                                keyExtractor={this._keyExtractors}
+                                renderItem={this._renderItems}
+                            />
+                        </ScrollView>                    
+                    </View>               
                 </ScrollView>
             </View>            
         );
@@ -181,7 +207,14 @@ class ListPemilik extends React.Component {
         this.props.dispatch(actions.auth.getPengeluaran(params))
     }
 
+    pickKost = (item) => {
+        this.props.dispatch({type:'RESET_DATA_ANAK'})
+        this.props.dispatch(actions.list.getAnakPerKos({id_kos: item.id_kos}))
+      }
+
     _keyExtractor = (item, index) => item.id_pengeluaran;
+
+    _keyExtractors = (item, index) => item.id_user;
 
     _renderItem = ({item, index}) => {
         var a = []
@@ -196,6 +229,18 @@ class ListPemilik extends React.Component {
             </TouchableOpacity>
         )
     }
+
+    _renderItems = ({item}) => (
+        <ScrollView>
+        <TouchableOpacity onPress={()=> Actions.detailAnak({ datas: item })} style={{ flexDirection: "row", marginBottom:15, justifyContent:'space-between'}}>
+            <Image style={{ resizeMode: 'contain', width: "40%", height: 200}} source={require('../assets/girl.png')}/>
+            <View style={{flexDirection: "column", width:'60%', alignSelf: "center", marginTop: 10, marginBottom:10}}>
+                <Text style={{fontSize: 25, color: 'black', alignSelf: 'center'}}>{item.nama}</Text>
+                <Text style={{fontSize: 15, color: 'black', alignSelf: 'center'}}>{item.email}</Text>
+            </View>
+        </TouchableOpacity>
+        </ScrollView>
+      );
 };
 
 const mapStateToProps = (state) => ({
