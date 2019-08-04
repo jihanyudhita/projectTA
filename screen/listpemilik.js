@@ -108,19 +108,19 @@ class ListPemilik extends React.Component {
                         !this.state.show ? null:     
                         <Picker style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                                                                        
                             selectedValue={this.state.language}
-                            onValueChange={(itemValue, itemIndex) =>
-                                {
-                                    this.setState({ language: itemValue, selectedValue: itemValue })
-                                    this.pengeluaran(this.state.data[itemIndex])
-                                }
+                            onValueChange={(itemValue, itemIndex) => 
+                                { 
+                                    this.setState({ language: itemValue, selectedValue: itemValue }) 
+                                    this.pengeluaran(this.state.data[itemIndex]) 
+                                } 
                         }>
-                            {
-                                this.state.data.map((x)=>{
-                                    return (
+                            { 
+                                this.state.data.map((x)=>{ 
+                                    return ( 
                                         <Picker.item label={x.nama_kos} value={x.id_kos}/>
-                                    )
-                                })
-                            }
+                                    ) 
+                                }) 
+                            } 
                         </Picker>  
                     }         
                     {
@@ -171,7 +171,7 @@ class ListPemilik extends React.Component {
 
     pengeluaran = (value) => {
         console.log('prut', value)
-        this.props.dispatch({type:'RESET_PENGELUARAN'})
+        this.props.dispatch({type:'RESET_PENGELUARAN'})  
         const params = {
             id_kos : value.id_kos,
             tahun : '2019',
