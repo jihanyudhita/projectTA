@@ -106,13 +106,14 @@ class ListPemilik extends React.Component {
                     </TouchableOpacity>     
                     {
                         !this.state.show ? null:     
-                        <Picker style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                        
-                            // selectedValue={this.state.selectedValue}
+                        <Picker style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                                                                        
+                            selectedValue={this.state.language}
                             onValueChange={(itemValue, itemIndex) =>
-                                this.pengeluaran(this.state.data[itemIndex])
-                                
-                            }
-                        >
+                                {
+                                    this.setState({ language: itemValue, selectedValue: itemValue })
+                                    this.pengeluaran(this.state.data[itemIndex])
+                                }
+                        }>
                             {
                                 this.state.data.map((x)=>{
                                     return (
@@ -171,9 +172,6 @@ class ListPemilik extends React.Component {
     pengeluaran = (value) => {
         console.log('prut', value)
         this.props.dispatch({type:'RESET_PENGELUARAN'})
-        this.setState({
-            selectedValue: value.nama_kos
-        })
         const params = {
             id_kos : value.id_kos,
             tahun : '2019',
