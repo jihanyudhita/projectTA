@@ -96,7 +96,7 @@ class Home extends Component {
                             onPress={() => this.setState({ ...init, opt4: true })}
                         >
                             <Icon name='ios-list' type='Ionicons' />
-                            <Text style={text}>List Anak</Text>
+                            <Text style={text}>List Pengelola</Text>
                         </TouchableOpacity>
                     }                        
                     {

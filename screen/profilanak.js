@@ -73,7 +73,7 @@ class ProfilAnak extends React.Component {
                 <Modal backButtonClose={true} isOpen={this.state.modal} onClosed={()=>this.setState({modal:false})} position='center' 
                     style={{width: '80%', height: 300, justifyContent: 'center'}}>
                         {
-                            this.props.data ? this.props.data.response.role == 'anak_kos' : 'anak_kos' ? 
+                            this.props.data ? this.props.data.response.role == 'anak_kos' ? 
                             <View style={{width: '100%', height: '100%', backgroundColor: 'white', justifyContent: 'center'}}>
                                 <Text style={{fontSize: 18, fontWeight: 'bold', alignSelf: 'center'}}>Transaksi telah dibayarkan pada:</Text>
                                 <Text style={{marginTop: 10, fontSize: 15, alignSelf:'center'}}>{this.state.detailData ? this.state.detailData[0].waktu_pembayaran : '0000-00-00'} </Text>
@@ -103,6 +103,7 @@ class ProfilAnak extends React.Component {
                                         parseInt(this.state.detailData ? this.state.detailData[0].listrik : '0')+parseInt(this.state.detailData ? this.state.detailData[0].kerusakan : '0')}</Text>
                                 </View>
                             </View>
+                            : null
                         }
                 </Modal>
                 <ScrollView style={{flex:1}}>
