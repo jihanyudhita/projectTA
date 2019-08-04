@@ -21,6 +21,7 @@ class HomeScreen extends React.Component {
 
   componentWillMount(){
     this.props.dispatch({ type: 'RESET' });
+    this.props.dispatch({type:'RESET_DATA_ANAK'})
   }
 
   componentDidMount(){    
