@@ -3,7 +3,6 @@ import {Alert} from 'react-native';
 
 export default {
     Login: (params) => {
-        console.log('params', params)
         return dispatch => {
             API.Login(params)
                 .then((response) => {

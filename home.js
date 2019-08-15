@@ -82,7 +82,7 @@ class Home extends Component {
                         !this.state.isPemilik && !this.state.isPengelola ?
                         <TouchableOpacity
                             style={[buttonInactive, this.state.opt2 && buttonActive]}
-                            onPress={() => this.setState({ ...init, opt2: true })}
+                            onPress={() => this.cek()}
                         >
                             <Icon name='ios-list' type='Ionicons' />
                             <Text style={text}>Form Pembayaran</Text>
@@ -121,6 +121,14 @@ class Home extends Component {
             </View>
         );
     }
+    cek = () => {
+        if(!this.props.data) {
+          alert('Silahkan login terlebih dahulu')
+        }
+        else {
+          this.setState({ ...init, opt2: true })
+        }
+      }
 }
 
 const styles = StyleSheet.create({

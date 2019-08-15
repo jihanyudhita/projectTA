@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet,  View, TextInput, SafeAreaView, Image, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native';
-import { Button, Header, Left, Body, Right, Icon, Picker} from 'native-base';
+import { StyleSheet,  View, TextInput, Image, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native';
+import { Button, Icon, Picker} from 'native-base';
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import action from '../actions'
@@ -16,7 +16,15 @@ import action from '../actions'
             password: '',
             no_hp: '',
             asal: '',
-            nama_kos: ''           
+            nama_kos: '',
+            picked: false, 
+            data: ['Kos Putri Srikandi 1',
+            'Kos Putri Srikandi 2',
+            'Kos Putri Srikandi 3',
+            'Kos Putri Srikandi 4',
+            'Kos Putri Srikandi 5',
+            'Kos Putri Srikandi 6'],
+            selectedValue: '',          
         }
     }
 
@@ -86,7 +94,7 @@ import action from '../actions'
                     <View style={{marginTop: 20, flexDirection: "row", marginHorizontal: 20, alignItems:'center', justifyContent: 'center'}}>
                         <Icon name='lock' type='Feather' style={{color: 'rgb(2,98,148)'}}/>
                         <TextInput style={{width: '80%', borderBottomColor: 'rgb(2,98,148)', borderBottomWidth: 1, backgroundColor: 'transparent', marginLeft: 10, marginRight: 10, height: 50, color: 'rgb(2,98,148)'}}
-                        placeholder= 'Password' placeholderTextColor={'rgb(2,98,148)'}
+                        placeholder= 'Password' placeholderTextColor={'rgb(2,98,148)'} secureTextEntry={true}
                         onChangeText={(text)=> this.setState({password:text})}
                         >
                         </TextInput>
@@ -139,12 +147,31 @@ import action from '../actions'
                     </View>
                     <View style={{marginTop: 20, paddingLeft: 20, flexDirection: "row", marginHorizontal: 20, alignItems:'center', justifyContent: 'center'}}>
                         <Icon name='home' type='Feather' style={{color: 'rgb(2,98,148)'}}/>
-                        <Picker selectedValue={this.state.id_kos} onValueChange= {(value)=> this.setState({id_kos: value})}>
-                            <Picker.Item label="Kos Srikandi 1" value="srikandi 1" />
-                            <Picker.Item label="Kos Srikandi 2" value="srikandi 2" />
-                            <Picker.Item label="Kos Srikandi 3" value="srikandi 3" />
-                            <Picker.Item label="Kos Srikandi 4" value="srikandi 4" />
-                            <Picker.Item label="Kos Srikandi 5" value="srikandi 5" />
+                        {/* <Picker style={{width: '40%', height: 40, justifyContent:'center', alignItems:'center', alignSelf:'center', backgroundColor:'#e0e0e0'}}                                                                        
+                            selectedValue={this.state.dataKos}
+                            onValueChange={(itemValue, itemIndex) => 
+                                { 
+                                    this.setState({ dataKos: itemValue }) 
+                                    this.pickKost(this.state.data[itemIndex]) 
+                                } 
+                        }>
+                            <Picker.item label= "Pilih kos" value=''/>
+                            { 
+                                this.state.data.map((x)=>{ 
+                                    return ( 
+                                        <Picker.item label={x.nama_kos} value={x.id_kos}/>
+                                    ) 
+                                }) 
+                            } 
+                        </Picker> */}
+                        
+                        <Picker selectedValue={this.state.id_kos} 
+                                onValueChange= {(value)=> this.setState({id_kos: value})}>
+                            <Picker.Item label="Kos Srikandi 1" value="8" />
+                            <Picker.Item label="Kos Srikandi 2" value="9" />
+                            <Picker.Item label="Kos Srikandi 3" value="10" />
+                            <Picker.Item label="Kos Srikandi 4" value="11" />
+                            <Picker.Item label="Kos Srikandi 5" value="7" /> 
                         </Picker>
                     </View>
                     <View style={{marginTop: 20, flexDirection: "row", marginHorizontal: 20, alignItems:'center', justifyContent: 'center'}}>
@@ -204,8 +231,8 @@ import action from '../actions'
         else if(this.state.asal == ''){
             alert("Asal kos tidak boleh kosong!")
         }
-        else if(this.state.nama_kos == ''){
-            alert("Nama kos tidak boleh kosong!")
+        else if(this.state.id_kos == ''){
+            alert("Silahkan pilih kos terlebih dahulu!")
         }
         else {
             const register={
@@ -218,7 +245,8 @@ import action from '../actions'
                 id_kos: this.state.id_kos,
             }
         this.props.dispatch(action.auth.Register(register))
-        }
+        console.log('register', register)
+    }
     }
 };
 const styles = StyleSheet.create({

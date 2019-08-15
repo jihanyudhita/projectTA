@@ -1,8 +1,7 @@
 import React from 'react';
 import {Actions} from 'react-native-router-flux';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { StyleSheet,  View, Picker, FlatList, Image, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import { Button, Header, Left, Body, Right, Icon} from 'native-base'
+import { StyleSheet,  View, Picker, FlatList, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
+import {Icon} from 'native-base'
 import {connect} from 'react-redux'
 import actions from '../actions'
 
@@ -95,7 +94,7 @@ class ListPemilik extends React.Component {
     // }
 
     render() {
-        console.log('meldy', this.state.anakPerKos)
+        console.log('meldy', this.state.data)
         return(
             <View style={{width: '100%', height:'100%'}}>
                 <ScrollView style={{flex:1}}>
@@ -206,8 +205,10 @@ class ListPemilik extends React.Component {
     }
 
     pickKost = (item) => {
+        console.log('pickKost', item)
         this.props.dispatch({type:'RESET_DATA_ANAK'})
         this.props.dispatch(actions.list.getAnakPerKos({id_kos: item.id_kos}))
+        
       }
 
     _keyExtractor = (item, index) => item.id_pengeluaran;

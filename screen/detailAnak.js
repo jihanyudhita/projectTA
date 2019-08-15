@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, FlatList } from 'react-native';
-import { Button, Header, Left, Body, Right, Icon, Picker} from 'native-base'
+import {Icon} from 'native-base';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { connect } from 'react-redux';
 import action from '../actions';

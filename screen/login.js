@@ -24,6 +24,7 @@ import action from '../actions';
 
   componentDidMount(){
     console.log('awal', this.props)
+    // this.props.dispatch({ type: 'RESET_LOGIN' });
   } // komponen yang akan dijalankan pertama kali
 
 
@@ -39,7 +40,7 @@ import action from '../actions';
     console.log('next',props)
     if(props.data.response.status == 1){
       ToastAndroid.show('Login successfully', ToastAndroid.SHORT);
-      Actions.HomeScreen()
+      Actions.home()
     } else {
       ToastAndroid.show('Login failed, please try again', ToastAndroid.SHORT);
     }

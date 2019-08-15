@@ -74,7 +74,7 @@ class EditProfil extends React.Component {
                 <View style={{borderBottomColor: 'rgb(2,98,148)', borderBottomWidth: 1, marginTop: 20, flexDirection: "row", width:'90%', alignSelf:'center', alignItems:'center', justifyContent: 'space-between'}}>
                     <Text style={{fontSize: 15, color: '#808080', width:'40%'}}>Password Baru</Text>
                     <TextInput style={{backgroundColor: 'transparent', width:'60%',alignItems:'flex-start', color: 'black'}}
-                        placeholder= 'Masukkan password baru' value={this.state.newPassword} placeholderTextColor={'#808080'}
+                        placeholder= 'Masukkan password baru' value={this.state.newPassword} placeholderTextColor={'#808080'} secureTextEntry={true}
                         onChangeText={(text)=> this.setState({ newPassword: text})}
                     >
                     </TextInput>

@@ -23,7 +23,6 @@ const _api = async (url, options = {
 
 export default {
     Login: async (params) => {
-        console.log('params api', params)
         return _api('user_login',{
             method: 'POST',
             head: {
@@ -37,7 +36,6 @@ export default {
     },
 
     Register: async (params) => {
-        console.log('params api', params)
         return _api('user_register',{
             method: 'POST',
             head: {

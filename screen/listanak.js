@@ -108,6 +108,7 @@ class ListAnak extends React.Component {
   }
 
   _bayar = () => {
+    //kirim data
     const params = {
       id_user: this.props.data.response.id_user,
       bulan : this.state.picked,
@@ -119,7 +120,7 @@ class ListAnak extends React.Component {
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.isLoggedIn,
-  data: state.data,
+  data: state.data, // wadah login
   anak_bayar: state.anak_bayar
 })
 

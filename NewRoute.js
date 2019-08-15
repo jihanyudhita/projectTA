@@ -63,7 +63,7 @@ class NewRoute extends React.Component {
                     <Scene key="root">
                         <Scene key="HomeScreen" component={HomeScreen} hideNavBar />
                         <Scene key='detailprofil' component={ProfilAnak} hideNavBar />
-                        <Scene key='login' component={Login} hideNavBar />
+                        <Scene key='login' component={Login} hideNavBar  />
                         <Scene key='home' component={Home} hideNavBar initial />
                         {/* <Scene key='route' component={Routers} hideNavBar/> */}
                         <Scene key='register' component={Register} hideNavBar />

@@ -115,7 +115,7 @@ class ProfilAnak extends React.Component {
                     <View style={{backgroundColor: 'white', flexDirection: "row", alignItems:'center'}}>
                         <Image style={{resizeMode: 'contain', width: "40%", height: "40%"}} source={require('../assets/girl.jpg')}/>
                         <View style={{flexDirection: "column", alignSelf: "flex-start", marginTop: 20, marginLeft: 8, marginBottom:20}}>
-                            <Text style={{fontSize: 15, color: 'black', alignSelf: 'center'}}>{this.props.data ? this.props.data.response.nama : 'Admin'}</Text>
+                            <Text style={{fontSize: 15, color: 'black', alignSelf: 'center', fontWeight: 'bold'}}>{this.props.data ? this.props.data.response.nama : 'Admin'}</Text>
                             <TouchableOpacity onPress={()=>Actions.editprofil()} style={{ width: 100, padding:10, justifyContent:'center'}}>
                                 <Text style={{marginTop: 10, fontSize: 15, color:'black', alignSelf:'center'}}>edit profile</Text>
                             </TouchableOpacity>
@@ -137,7 +137,7 @@ class ProfilAnak extends React.Component {
                     {
                         !this.state.show ? null:                    
                     <KeyboardAvoidingView>                        
-                        <View style={{marginTop: 20, flexDirection: "row", marginHorizontal: 20, alignItems:'center', justifyContent: 'space-between'}}>
+                        <View style={{marginTop: 20, flexDirection: "row", marginHorizontal: 20, justifyContent: 'space-between'}}>
                             <Text style={{fontSize: 15, color: '#808080'}}>Full Name</Text>
                             <Text style={{fontSize: 15, color: 'black'}}>{this.props.data ? this.props.data.response.nama:'No Name'}</Text>
                         </View>
@@ -157,7 +157,7 @@ class ProfilAnak extends React.Component {
                             <Text style={{fontSize: 15, color: '#808080'}}>Username</Text>
                             <Text style={{fontSize: 15, color: 'black'}}>jihanyudhita</Text>
                         </View> */}
-                        <View style={{marginTop: 20, flexDirection: "row", marginHorizontal: 20, alignItems:'center', justifyContent: 'space-between'}}>
+                        <View style={{marginTop: 20, flexDirection: "row", marginHorizontal: 20, alignItems:'center', justifyContent: 'space-between', marginBottom: 10}}>
                             <Text style={{fontSize: 15, color: '#808080'}}>Gender</Text>
                             <Text style={{fontSize: 15, color: 'black'}}>{this.props.data ? this.props.data.response.gender == 'p' ? "Perempuan":"Laki - Laki":'Tidak diketahui'}</Text>
                         </View>
